@@ -25,8 +25,12 @@ repositories {
 
 dependencies {
 	implementation("org.springframework.boot:spring-boot")
+	implementation("org.springframework.boot:spring-boot-starter-jdbc") {
+		exclude("org.apache.tomcat", "tomcat-jdbc")
+	}
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
+	implementation("org.postgresql:postgresql")
 	compileOnly("org.projectlombok:lombok")
 	annotationProcessor("org.springframework.boot:spring-boot-configuration-processor")
 	annotationProcessor("org.projectlombok:lombok")
