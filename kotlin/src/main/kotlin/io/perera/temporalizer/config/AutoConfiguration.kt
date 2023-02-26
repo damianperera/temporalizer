@@ -18,11 +18,36 @@
 
 package io.perera.temporalizer.config
 
+import io.perera.temporalizer.data.DataSourceConfig
+import org.springframework.beans.factory.annotation.Value
 import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.ComponentScan
 import org.springframework.context.annotation.Configuration
 
 @Configuration
 @ConfigurationProperties(prefix = "temporalizer")
 @ComponentScan("io.perera.temporalizer")
-class AutoConfiguration
+class AutoConfiguration {
+
+    @Value("\${temporalizer.postgres.url}")
+    val dbURL: String? = null
+
+    @Value("\${temporalizer.postgres.dbname}")
+    val dbName: String? = null
+
+    @Value("\${temporalizer.postgres.username}")
+    val dbUsername: String? = null
+
+    @Value("\${temporalizer.postgres.password}")
+    val dbPassword: String? = null
+
+    @Bean
+    fun datasourceParameters() =
+        DataSourceConfig(
+            url = dbURL ?: throw Exception("Not Defined - temporalizer.postgres.url"),
+            name = dbName ?: throw Exception("Not Defined - temporalizer.postgres.dbname"),
+            username = dbUsername ?: throw Exception("Not Defined - temporalizer.postgres.username"),
+            password = dbPassword ?: throw Exception("Not Defined - temporalizer.postgres.password")
+        )
+}
