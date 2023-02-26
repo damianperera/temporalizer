@@ -29,7 +29,8 @@ import java.util.UUID
 
 @Component
 class EntityBasedTemporalizer(
-    private val repository: MilestoneRepository
+    private val repository: MilestoneRepository,
+    private val milestoneEngine: MilestoneEngine
 ): Temporalizer, InputConverter {
     override fun get(input: Input, validFrom: Instant) {
         val entity = parseInput(input)
@@ -40,15 +41,7 @@ class EntityBasedTemporalizer(
         val entity = parseInput(milestone.entity)
         val existingMilestones = repository.getRange(entity.type, entity.id, Instant.MIN, Instant.MAX)
 
-        val (previousMilestone, nextMilestone) = existingMilestones.sortedBy { it.validFrom }
-            .let { sortedMilestones ->
-                val index = sortedMilestones.binarySearch { it.validFrom.compareTo(milestone.validFrom) }
-                if (index < 0) {
-                    Pair(sortedMilestones.getOrNull(-(index + 1) - 1), sortedMilestones.getOrNull(-(index + 1)))
-                } else {
-                    Pair(sortedMilestones.getOrNull(index - 1), sortedMilestones.getOrNull(index + 1))
-                }
-            }
+        val (previousMilestone, nextMilestone) = milestoneEngine.getBeforeAndAfter(existingMilestones, milestone)
 
         if (previousMilestone != null) {
             previousMilestone.validTo = milestone.validFrom
