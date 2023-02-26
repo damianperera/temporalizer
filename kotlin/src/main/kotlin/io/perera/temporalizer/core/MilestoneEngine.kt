@@ -23,7 +23,6 @@ import io.perera.temporalizer.data.MilestoneValidFrom
 
 class MilestoneEngine {
     companion object {
-
         fun getBeforeAndAfter(existingMilestones: List<Milestone>, currentMilestone: Milestone) =
             existingMilestones.sortedBy { it.validFrom }
                 .let { sortedMilestones ->
@@ -45,7 +44,5 @@ class MilestoneEngine {
                         sortedMilestones.getOrNull(index - 1)
                     }
                 }
-
     }
-
 }
