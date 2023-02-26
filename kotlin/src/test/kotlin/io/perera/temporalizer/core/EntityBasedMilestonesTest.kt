@@ -20,6 +20,7 @@ package io.perera.temporalizer.core
 
 import io.kotest.matchers.shouldBe
 import io.perera.temporalizer.data.Input
+import io.perera.temporalizer.data.Milestone
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
@@ -35,6 +36,17 @@ class EntityBasedMilestonesTest {
         }
 
         exception.message shouldBe "Expected [Entity] but did not find any."
+    }
+
+    @Test
+    fun `getMilestoneChanges throws exception if input is not valid`() {
+        val input = object : Input{}
+        val milestone = object : Milestone{}
+        val exception = assertThrows<Exception> {
+            stub.getMilestoneChanges(input, listOf(milestone))
+        }
+
+        exception.message shouldBe "Expected [EntityMilestone] but did not find any."
     }
 
 }
