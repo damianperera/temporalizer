@@ -30,16 +30,16 @@ import org.springframework.context.annotation.Configuration
 @ComponentScan("io.perera.temporalizer")
 class AutoConfiguration {
 
-    @Value("\${temporalizer.postgres.url}")
+    @Value("\${postgres.url}")
     val dbURL: String? = null
 
-    @Value("\${temporalizer.postgres.dbname}")
+    @Value("\${postgres.dbname}")
     val dbName: String? = null
 
-    @Value("\${temporalizer.postgres.username}")
+    @Value("\${postgres.username}")
     val dbUsername: String? = null
 
-    @Value("\${temporalizer.postgres.password}")
+    @Value("\${postgres.password}")
     val dbPassword: String? = null
 
     @Bean
