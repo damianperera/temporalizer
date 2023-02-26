@@ -20,9 +20,12 @@ package io.perera.temporalizer.repository
 
 import io.perera.temporalizer.data.*
 import org.springframework.stereotype.Repository
+import javax.sql.DataSource
 
 @Repository
-class EntityMilestoneRepository: MilestoneRepository {
+class EntityMilestonePostgresRepository(
+    private val postgresDataSource: DataSource
+): MilestoneRepository {
 
     override fun getRange(
         entityType: EntityType,

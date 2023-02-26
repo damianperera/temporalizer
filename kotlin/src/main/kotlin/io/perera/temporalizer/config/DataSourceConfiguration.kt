@@ -31,7 +31,7 @@ class DataSourceConfiguration(
 ) {
 
     @Bean
-    fun dataSource(): DataSource {
+    fun postgresDataSource(): DataSource {
         val hikariConfig = HikariConfig()
         hikariConfig.jdbcUrl = "${config.url}/${config.name}"
         hikariConfig.username = config.username
