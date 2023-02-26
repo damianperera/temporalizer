@@ -1,6 +1,6 @@
 /*
  * Temporalizer - Manage Bi-Temporal History
- * Copyright (C) 2023  Damian Perera
+ * Copyright (C) 2023 Damian Perera
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
