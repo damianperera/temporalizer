@@ -42,14 +42,14 @@ class EntityBasedTemporalizerTest {
 
     @Test
     fun `getMilestoneChanges throws exception if input is not valid`() {
-        val input = Entity()
-        val milestone = object : Milestone{}
+        val input = object : Input{}
+        val milestone = Milestone()
 
         val exception = assertThrows<Exception> {
             stub.getMilestoneChanges(input, listOf(milestone))
         }
 
-        exception.message shouldBe "Expected [EntityMilestone] but did not find any."
+        exception.message shouldBe "Expected [Entity] as input."
     }
 
 }

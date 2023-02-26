@@ -24,8 +24,8 @@ import lombok.EqualsAndHashCode.Include
 @EqualsAndHashCode
 open class Entity(
     @Include
-    private val id: String = String(),
+    val id: String = String(),
     @Include
-    private val name: String = String(),
-    private val attributes: HashMap<String, Any> = hashMapOf()
+    val name: String = String(),
+    val attributes: HashMap<String, Any> = hashMapOf()
 ): Input

@@ -19,39 +19,34 @@
 package io.perera.temporalizer.core
 
 import io.perera.temporalizer.data.Entity
-import io.perera.temporalizer.data.EntityMilestone
-import io.perera.temporalizer.data.Input
 import io.perera.temporalizer.data.Milestone
+import io.perera.temporalizer.data.Input
+import io.perera.temporalizer.data.InputConverter
 import org.springframework.stereotype.Component
 
 @Component
-class EntityBasedTemporalizer: Temporalizer {
+class EntityBasedTemporalizer: Temporalizer, InputConverter {
     override fun getInitialMilestones(inputs: List<Input>): List<Milestone> {
-        getInputsAsEntities(inputs)
+        parseInput(inputs)
         TODO("Not yet implemented")
     }
 
     override fun getMilestoneChanges(input: Input, existingMilestones: List<Milestone>): List<Milestone> {
-        val entity = getInputAsEntity(input)
-        val milestones = getMilestonesAsEntityMilestones(existingMilestones)
+        val entity = parseInput(input)
+        val milestones = existingMilestones.sortedBy { it.validFrom }
+
         TODO("Not yet implemented")
     }
 
-    private fun getInputAsEntity(input: Input): Entity {
+    override fun parseInput(input: Input): Entity {
         if (input !is Entity) {
-            throw Exception("Expected [Entity]")
+            throw Exception("Expected [Entity] as input.")
         }
         return input
     }
 
-    private fun getInputsAsEntities(inputs: List<Input>): List<Entity> =
+    override fun parseInput(inputs: List<Input>): List<Entity> =
         inputs.filterIsInstance<Entity>().ifEmpty {
             throw Exception("Expected [Entity] but did not find any.")
         }
-
-    private fun getMilestonesAsEntityMilestones(milestones: List<Milestone>): List<EntityMilestone> =
-        milestones.filterIsInstance<EntityMilestone>().ifEmpty {
-            throw Exception("Expected [EntityMilestone] but did not find any.")
-        }
-
 }

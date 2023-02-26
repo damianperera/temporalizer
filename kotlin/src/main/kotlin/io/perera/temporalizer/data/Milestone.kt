@@ -18,4 +18,15 @@
 
 package io.perera.temporalizer.data
 
-interface Milestone
+import lombok.EqualsAndHashCode
+import lombok.EqualsAndHashCode.Include
+import java.time.Instant
+
+@EqualsAndHashCode
+data class Milestone(
+    @Include
+    val id: String = String(),
+    val validFrom: Instant = Instant.now(),
+    val validTo: Instant = Instant.now(),
+    val entity: Input = object : Input{}
+)

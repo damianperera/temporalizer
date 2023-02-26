@@ -18,13 +18,12 @@
 
 package io.perera.temporalizer.core
 
-import io.perera.temporalizer.data.EntityMilestone
-import io.perera.temporalizer.data.Input
 import io.perera.temporalizer.data.Milestone
+import io.perera.temporalizer.data.Input
 
 interface Temporalizer {
     /** Generates a [List] of [Milestone] for the provided [List] of [Input]. */
     fun getInitialMilestones(inputs: List<Input>): List<Milestone>
-    /** Returns the changes to [EntityMilestone] for the provided [Input].*/
+    /** Returns the changes to [Milestone] for the provided [Input].*/
     fun getMilestoneChanges(input: Input, existingMilestones: List<Milestone>): List<Milestone>
 }
