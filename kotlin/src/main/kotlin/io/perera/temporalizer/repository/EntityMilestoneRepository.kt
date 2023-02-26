@@ -24,10 +24,6 @@ import org.springframework.stereotype.Repository
 @Repository
 class EntityMilestoneRepository: MilestoneRepository {
 
-    override fun get(entityType: EntityType, entityId: EntityId, validFrom: MilestoneValidFrom): Milestone {
-        TODO("Not yet implemented")
-    }
-
     override fun getRange(
         entityType: EntityType,
         entityId: EntityId,
