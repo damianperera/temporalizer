@@ -5,9 +5,12 @@ Kotlin Library to manage the Bi-Temporal History
 ## Checklist
 - [x] Project
 - [x] Milestone Engine
-- [x] Entity Implementation
+- [x] Entity Milestone Impl.
 - [ ] Entity Storage
 - [ ] Entity Tests
-- [ ] Attribute Implementation
+- [ ] Entity Sample Project Impl.
+- [ ] Attribute Milestone Impl.
 - [ ] Attribute Storage
 - [ ] Attribute Tests
+- [ ] Attribute Sample Project Impl.
+- [ ] CI/CD
