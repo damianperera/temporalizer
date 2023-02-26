@@ -29,20 +29,19 @@ import java.util.UUID
 
 @Component
 class EntityBasedTemporalizer(
-    private val repository: MilestoneRepository,
-    private val milestoneEngine: MilestoneEngine
+    private val repository: MilestoneRepository
 ): Temporalizer, InputConverter {
     override fun get(input: Input, validFrom: Instant): Milestone? {
         val entity = parseInput(input)
         val existingMilestones = repository.getRange(entity.type, entity.id, Instant.MIN, Instant.MAX)
-        return milestoneEngine.getFrom(validFrom, existingMilestones)
+        return MilestoneEngine.getFrom(validFrom, existingMilestones)
     }
 
     override fun set(milestone: Milestone) {
         val entity = parseInput(milestone.entity)
         val existingMilestones = repository.getRange(entity.type, entity.id, Instant.MIN, Instant.MAX)
 
-        val (previousMilestone, nextMilestone) = milestoneEngine.getBeforeAndAfter(existingMilestones, milestone)
+        val (previousMilestone, nextMilestone) = MilestoneEngine.getBeforeAndAfter(existingMilestones, milestone)
 
         if (previousMilestone != null) {
             previousMilestone.validTo = milestone.validFrom
