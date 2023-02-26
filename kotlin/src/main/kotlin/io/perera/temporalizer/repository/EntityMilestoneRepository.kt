@@ -23,6 +23,7 @@ import org.springframework.stereotype.Repository
 
 @Repository
 class EntityMilestoneRepository: MilestoneRepository {
+
     override fun get(entityType: EntityType, entityId: EntityId, validFrom: MilestoneValidFrom): Milestone {
         TODO("Not yet implemented")
     }
@@ -36,7 +37,11 @@ class EntityMilestoneRepository: MilestoneRepository {
         TODO("Not yet implemented")
     }
 
-    override fun set(milestone: Milestone) {
+    override fun add(milestone: Milestone) {
+        TODO("Not yet implemented")
+    }
+
+    override fun update(milestone: Milestone) {
         TODO("Not yet implemented")
     }
 }
