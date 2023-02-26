@@ -40,7 +40,7 @@ class EntityBasedTemporalizer(
         val entity = parseInput(milestone.entity)
         val existingMilestones = repository.getRange(entity.type, entity.id, Instant.MIN, Instant.MAX)
 
-        val (before, after) = existingMilestones.sortedBy { it.validFrom }
+        val (previousMilestone, nextMilestone) = existingMilestones.sortedBy { it.validFrom }
             .let { sortedMilestones ->
                 val index = sortedMilestones.binarySearch { it.validFrom.compareTo(milestone.validFrom) }
                 if (index < 0) {
@@ -50,14 +50,14 @@ class EntityBasedTemporalizer(
                 }
             }
 
-        if (before != null) {
-            before.validTo = milestone.validFrom
-            repository.update(before)
+        if (previousMilestone != null) {
+            previousMilestone.validTo = milestone.validFrom
+            repository.update(previousMilestone)
         }
 
-        if (after != null) {
-            after.validFrom = milestone.validTo
-            repository.update(after)
+        if (nextMilestone != null) {
+            nextMilestone.validFrom = milestone.validTo
+            repository.update(nextMilestone)
         }
 
         repository.add(milestone.copy(id = UUID.randomUUID().toString()))
