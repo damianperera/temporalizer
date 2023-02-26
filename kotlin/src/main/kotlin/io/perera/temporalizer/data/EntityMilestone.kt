@@ -18,8 +18,14 @@
 
 package io.perera.temporalizer.data
 
+import lombok.EqualsAndHashCode
+import lombok.EqualsAndHashCode.Include
+
+@EqualsAndHashCode
 data class EntityMilestone(
+    @Include
     private val id: String,
+    @Include
     private val name: String,
     private val validFrom: String,
     private val validTo: String,

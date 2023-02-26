@@ -18,7 +18,6 @@
 
 package io.perera.temporalizer.data
 
-import jakarta.validation.constraints.NotBlank
 import lombok.EqualsAndHashCode
 import lombok.EqualsAndHashCode.Include
 
@@ -28,6 +27,5 @@ open class Entity(
     private val id: String,
     @Include
     private val name: String,
-    @field:NotBlank
     private val attributes: HashMap<String, Any>
 ): Input
