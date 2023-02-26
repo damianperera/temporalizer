@@ -43,7 +43,7 @@ class AutoConfiguration {
     val dbPassword: String? = null
 
     @Bean
-    fun datasourceParameters() =
+    fun dataSourceConfig() =
         DataSourceConfig(
             url = dbURL ?: throw Exception("Not Defined - temporalizer.postgres.url"),
             name = dbName ?: throw Exception("Not Defined - temporalizer.postgres.dbname"),
