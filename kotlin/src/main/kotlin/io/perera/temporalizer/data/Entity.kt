@@ -27,5 +27,5 @@ open class Entity(
     val id: EntityId = String(),
     @Include
     val type: EntityType = String(),
-    val attributes: HashMap<AttributeName, Any> = hashMapOf()
+    val attributes: Map<AttributeName, AttributeValue> = emptyMap()
 ): Input

@@ -26,3 +26,4 @@ typealias MilestoneValidTo = Instant
 typealias EntityId = String
 typealias EntityType = String
 typealias AttributeName = String
+typealias AttributeValue = String
