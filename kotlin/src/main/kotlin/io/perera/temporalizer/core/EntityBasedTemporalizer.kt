@@ -19,23 +19,48 @@
 package io.perera.temporalizer.core
 
 import io.perera.temporalizer.data.Entity
-import io.perera.temporalizer.data.Milestone
 import io.perera.temporalizer.data.Input
 import io.perera.temporalizer.data.InputConverter
+import io.perera.temporalizer.data.Milestone
 import io.perera.temporalizer.repository.MilestoneRepository
 import org.springframework.stereotype.Component
 import java.time.Instant
+import java.util.UUID
 
 @Component
 class EntityBasedTemporalizer(
     private val repository: MilestoneRepository
 ): Temporalizer, InputConverter {
     override fun get(input: Input, validFrom: Instant) {
-        TODO("Not yet implemented")
+        val entity = parseInput(input)
+        repository.get(entity.type, entity.id, validFrom)
     }
 
     override fun set(milestone: Milestone) {
-        TODO("Not yet implemented")
+        val entity = parseInput(milestone.entity)
+        val existingMilestones = repository.getRange(entity.type, entity.id, Instant.MIN, Instant.MAX)
+
+        val (before, after) = existingMilestones.sortedBy { it.validFrom }
+            .let { sortedObjects ->
+                val index = sortedObjects.binarySearch { it.validFrom.compareTo(milestone.validFrom) }
+                if (index < 0) {
+                    Pair(sortedObjects.getOrNull(-(index + 1) - 1), sortedObjects.getOrNull(-(index + 1)))
+                } else {
+                    Pair(sortedObjects.getOrNull(index - 1), sortedObjects.getOrNull(index + 1))
+                }
+            }
+
+        if (before != null) {
+            before.validTo = milestone.validFrom
+            repository.set(before)
+        }
+
+        if (after != null) {
+            after.validFrom = milestone.validTo
+            repository.set(after)
+        }
+
+        repository.set(milestone)
     }
 
     override fun parseInput(input: Input): Entity {

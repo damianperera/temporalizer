@@ -18,12 +18,10 @@
 
 package io.perera.temporalizer.repository
 
-import io.perera.temporalizer.data.Milestone
-import io.perera.temporalizer.data.MilestoneValidFrom
-import io.perera.temporalizer.data.MilestoneValidTo
+import io.perera.temporalizer.data.*
 
 interface MilestoneRepository {
-    fun get(validFrom: MilestoneValidFrom): Milestone
-    fun getRange(validFrom: MilestoneValidFrom, validTo: MilestoneValidTo): List<Milestone>
+    fun get(entityType: EntityType, entityId: EntityId, validFrom: MilestoneValidFrom): Milestone
+    fun getRange(entityType: EntityType, entityId: EntityId, validFrom: MilestoneValidFrom, validTo: MilestoneValidTo): List<Milestone>
     fun set(milestone: Milestone)
 }

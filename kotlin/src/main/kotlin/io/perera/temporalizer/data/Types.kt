@@ -23,3 +23,6 @@ import java.time.Instant
 typealias MilestoneId = String
 typealias MilestoneValidFrom = Instant
 typealias MilestoneValidTo = Instant
+typealias EntityId = String
+typealias EntityType = String
+typealias AttributeName = String

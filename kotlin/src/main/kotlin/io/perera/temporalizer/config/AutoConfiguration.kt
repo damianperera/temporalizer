@@ -16,24 +16,13 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.perera.temporalizer.repository
+package io.perera.temporalizer.config
 
-import io.perera.temporalizer.data.Milestone
-import io.perera.temporalizer.data.MilestoneValidFrom
-import io.perera.temporalizer.data.MilestoneValidTo
-import org.springframework.stereotype.Repository
+import org.springframework.boot.context.properties.ConfigurationProperties
+import org.springframework.context.annotation.ComponentScan
+import org.springframework.context.annotation.Configuration
 
-@Repository
-class PostgresRepository: MilestoneRepository {
-    override fun get(validFrom: MilestoneValidFrom): Milestone {
-        TODO("Not yet implemented")
-    }
-
-    override fun getRange(validFrom: MilestoneValidFrom, validTo: MilestoneValidTo): List<Milestone> {
-        TODO("Not yet implemented")
-    }
-
-    override fun set(milestone: Milestone) {
-        TODO("Not yet implemented")
-    }
-}
+@Configuration
+@ConfigurationProperties(prefix = "temporalizer")
+@ComponentScan("io.perera.temporalizer")
+class AutoConfiguration

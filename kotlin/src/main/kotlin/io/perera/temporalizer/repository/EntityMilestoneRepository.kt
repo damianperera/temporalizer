@@ -16,16 +16,27 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.perera.temporalizer.data
+package io.perera.temporalizer.repository
 
-import lombok.EqualsAndHashCode
-import lombok.EqualsAndHashCode.Include
+import io.perera.temporalizer.data.*
+import org.springframework.stereotype.Repository
 
-@EqualsAndHashCode
-open class Entity(
-    @Include
-    val id: EntityId = String(),
-    @Include
-    val type: EntityType = String(),
-    val attributes: HashMap<AttributeName, Any> = hashMapOf()
-): Input
+@Repository
+class EntityMilestoneRepository: MilestoneRepository {
+    override fun get(entityType: EntityType, entityId: EntityId, validFrom: MilestoneValidFrom): Milestone {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRange(
+        entityType: EntityType,
+        entityId: EntityId,
+        validFrom: MilestoneValidFrom,
+        validTo: MilestoneValidTo
+    ): List<Milestone> {
+        TODO("Not yet implemented")
+    }
+
+    override fun set(milestone: Milestone) {
+        TODO("Not yet implemented")
+    }
+}

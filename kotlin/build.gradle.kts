@@ -24,7 +24,7 @@ repositories {
 }
 
 dependencies {
-	implementation("org.springframework:spring-context")
+	implementation("org.springframework.boot:spring-boot")
 	implementation("org.jetbrains.kotlin:kotlin-reflect")
 	implementation("org.jetbrains.kotlin:kotlin-stdlib-jdk8")
 	compileOnly("org.projectlombok:lombok")

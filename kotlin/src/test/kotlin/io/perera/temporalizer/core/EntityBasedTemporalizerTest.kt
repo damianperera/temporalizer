@@ -18,15 +18,20 @@
 
 package io.perera.temporalizer.core
 
-import io.kotest.matchers.shouldBe
-import io.perera.temporalizer.data.Entity
-import io.perera.temporalizer.data.Input
+import io.perera.temporalizer.config.AutoConfiguration
 import io.perera.temporalizer.data.Milestone
 import org.junit.jupiter.api.Test
-import org.junit.jupiter.api.assertThrows
+import org.springframework.beans.factory.annotation.Autowired
+import org.springframework.boot.test.context.SpringBootTest
+import org.springframework.test.context.ContextConfiguration
 
-class EntityBasedTemporalizerTest {
-
-    private val stub = EntityBasedTemporalizer()
-
+@SpringBootTest
+@ContextConfiguration(classes = [AutoConfiguration::class])
+class EntityBasedTemporalizerTest @Autowired constructor(
+    private val stub: Temporalizer
+) {
+    @Test
+    fun `test if autowiring works`() {
+        stub.set(Milestone())
+    }
 }

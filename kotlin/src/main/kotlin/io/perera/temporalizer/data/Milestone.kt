@@ -26,7 +26,7 @@ import java.time.Instant
 data class Milestone(
     @Include
     val id: MilestoneId = String(),
-    val validFrom: MilestoneValidFrom = Instant.now(),
-    val validTo: MilestoneValidTo = Instant.MAX,
+    var validFrom: MilestoneValidFrom = Instant.now(),
+    var validTo: MilestoneValidTo = Instant.MAX,
     val entity: Input = object : Input{}
 )
