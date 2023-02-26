@@ -60,7 +60,7 @@ class EntityBasedTemporalizer(
             repository.set(after)
         }
 
-        repository.set(milestone)
+        repository.set(milestone.copy(id = UUID.randomUUID().toString()))
     }
 
     override fun parseInput(input: Input): Entity {

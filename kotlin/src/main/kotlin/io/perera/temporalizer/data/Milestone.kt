@@ -21,11 +21,12 @@ package io.perera.temporalizer.data
 import lombok.EqualsAndHashCode
 import lombok.EqualsAndHashCode.Include
 import java.time.Instant
+import java.util.UUID
 
 @EqualsAndHashCode
 data class Milestone(
     @Include
-    val id: MilestoneId = String(),
+    val id: MilestoneId = UUID.randomUUID().toString(),
     var validFrom: MilestoneValidFrom = Instant.now(),
     var validTo: MilestoneValidTo = Instant.MAX,
     val entity: Input = object : Input{}
