@@ -1,6 +1,6 @@
 # Temporalizer
 
-Kotlin Library to manage the Bi-Temporal History
+Kotlin Library to manage the Bi-Temporal History of Entities and Attributes
 
 ## Checklist
 - [x] Project
