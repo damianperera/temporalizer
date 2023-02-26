@@ -24,10 +24,10 @@ import lombok.EqualsAndHashCode.Include
 @EqualsAndHashCode
 data class EntityMilestone(
     @Include
-    private val id: String,
+    private val id: String = String(),
     @Include
-    private val name: String,
-    private val validFrom: String,
-    private val validTo: String,
-    private val attributes: HashMap<String, Any>
+    private val name: String = String(),
+    private val validFrom: String = String(),
+    private val validTo: String = String(),
+    private val attributes: HashMap<String, Any> = hashMapOf()
 ): Entity(id, name, attributes), Milestone

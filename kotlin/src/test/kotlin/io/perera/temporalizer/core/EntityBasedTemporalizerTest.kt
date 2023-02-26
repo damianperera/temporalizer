@@ -19,18 +19,20 @@
 package io.perera.temporalizer.core
 
 import io.kotest.matchers.shouldBe
+import io.perera.temporalizer.data.Entity
 import io.perera.temporalizer.data.Input
 import io.perera.temporalizer.data.Milestone
 import org.junit.jupiter.api.Test
 import org.junit.jupiter.api.assertThrows
 
-class EntityBasedMilestonesTest {
+class EntityBasedTemporalizerTest {
 
-    private val stub = EntityBasedMilestones()
+    private val stub = EntityBasedTemporalizer()
 
     @Test
     fun `getInitialMilestones throws exception if input is not valid`() {
         val input = object : Input{}
+
         val exception = assertThrows<Exception> {
             stub.getInitialMilestones(listOf(input))
         }
@@ -40,8 +42,9 @@ class EntityBasedMilestonesTest {
 
     @Test
     fun `getMilestoneChanges throws exception if input is not valid`() {
-        val input = object : Input{}
+        val input = Entity()
         val milestone = object : Milestone{}
+
         val exception = assertThrows<Exception> {
             stub.getMilestoneChanges(input, listOf(milestone))
         }

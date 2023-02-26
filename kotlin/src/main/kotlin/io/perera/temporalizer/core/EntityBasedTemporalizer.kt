@@ -25,15 +25,23 @@ import io.perera.temporalizer.data.Milestone
 import org.springframework.stereotype.Component
 
 @Component
-class EntityBasedMilestones: Temporalizer {
+class EntityBasedTemporalizer: Temporalizer {
     override fun getInitialMilestones(inputs: List<Input>): List<Milestone> {
-        val entities = getInputsAsEntities(inputs)
+        getInputsAsEntities(inputs)
         TODO("Not yet implemented")
     }
 
     override fun getMilestoneChanges(input: Input, existingMilestones: List<Milestone>): List<Milestone> {
+        val entity = getInputAsEntity(input)
         val milestones = getMilestonesAsEntityMilestones(existingMilestones)
         TODO("Not yet implemented")
+    }
+
+    private fun getInputAsEntity(input: Input): Entity {
+        if (input !is Entity) {
+            throw Exception("Expected [Entity]")
+        }
+        return input
     }
 
     private fun getInputsAsEntities(inputs: List<Input>): List<Entity> =
