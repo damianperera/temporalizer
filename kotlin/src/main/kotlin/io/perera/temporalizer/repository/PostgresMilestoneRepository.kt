@@ -16,14 +16,31 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.perera.temporalizer.core
+package io.perera.temporalizer.repository
 
-import io.kotest.matchers.shouldBe
-import org.junit.jupiter.api.Test
+import io.perera.temporalizer.data.*
+import org.springframework.stereotype.Repository
+import javax.sql.DataSource
 
-class EntityBasedTemporalizerTest {
-    @Test
-    fun `test if autowiring works`() {
-        "test" shouldBe "test"
+@Repository
+class PostgresMilestoneRepository(
+    private val postgresDataSource: DataSource
+): MilestoneRepository {
+
+    override fun getRange(
+        entityType: EntityType,
+        entityId: EntityId,
+        validFrom: MilestoneValidFrom,
+        validTo: MilestoneValidTo
+    ): List<Milestone> {
+        TODO("Not yet implemented")
+    }
+
+    override fun add(milestone: Milestone) {
+        TODO("Not yet implemented")
+    }
+
+    override fun update(milestone: Milestone) {
+        TODO("Not yet implemented")
     }
 }

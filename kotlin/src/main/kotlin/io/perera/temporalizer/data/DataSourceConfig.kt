@@ -18,9 +18,12 @@
 
 package io.perera.temporalizer.data
 
+import org.springframework.boot.context.properties.ConfigurationProperties
+
+@ConfigurationProperties(prefix = "temporalizer.postgres")
 data class DataSourceConfig(
-    val url: String,
-    val name: String,
-    val username: String,
-    val password: String
+    var url: String = String(),
+    var name: String = String(),
+    var username: String = String(),
+    var password: String = String()
 )

@@ -16,31 +16,14 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.perera.temporalizer.repository
+package io.perera.temporalizer
 
-import io.perera.temporalizer.data.*
-import org.springframework.stereotype.Repository
-import javax.sql.DataSource
+import org.springframework.boot.autoconfigure.SpringBootApplication
+import org.springframework.boot.runApplication
 
-@Repository
-class EntityMilestonePostgresRepository(
-    private val postgresDataSource: DataSource
-): MilestoneRepository {
+@SpringBootApplication
+class TemporalizerApplication
 
-    override fun getRange(
-        entityType: EntityType,
-        entityId: EntityId,
-        validFrom: MilestoneValidFrom,
-        validTo: MilestoneValidTo
-    ): List<Milestone> {
-        TODO("Not yet implemented")
-    }
-
-    override fun add(milestone: Milestone) {
-        TODO("Not yet implemented")
-    }
-
-    override fun update(milestone: Milestone) {
-        TODO("Not yet implemented")
-    }
+fun main(args: Array<String>) {
+    runApplication<TemporalizerApplication>(*args)
 }
