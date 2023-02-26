@@ -32,9 +32,10 @@ class EntityBasedTemporalizer(
     private val repository: MilestoneRepository,
     private val milestoneEngine: MilestoneEngine
 ): Temporalizer, InputConverter {
-    override fun get(input: Input, validFrom: Instant) {
+    override fun get(input: Input, validFrom: Instant): Milestone? {
         val entity = parseInput(input)
-        repository.get(entity.type, entity.id, validFrom)
+        val existingMilestones = repository.getRange(entity.type, entity.id, Instant.MIN, Instant.MAX)
+        return milestoneEngine.getFrom(validFrom, existingMilestones)
     }
 
     override fun set(milestone: Milestone) {

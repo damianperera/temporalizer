@@ -24,7 +24,7 @@ import java.time.Instant
 
 interface Temporalizer {
     /** Get temporal milestone. */
-    fun get(input: Input, validFrom: Instant)
+    fun get(input: Input, validFrom: Instant): Milestone?
     /** Set milestone to date, backdate or postdate. */
     fun set(milestone: Milestone)
 }

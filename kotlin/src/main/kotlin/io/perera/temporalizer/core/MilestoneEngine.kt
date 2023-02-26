@@ -19,19 +19,32 @@
 package io.perera.temporalizer.core
 
 import io.perera.temporalizer.data.Milestone
+import io.perera.temporalizer.data.MilestoneValidFrom
 import org.springframework.stereotype.Component
 
 @Component
 class MilestoneEngine {
 
-    fun getBeforeAndAfter(existingMilestones: List<Milestone>, currentMilestone: Milestone) = existingMilestones.sortedBy { it.validFrom }
-        .let { sortedMilestones ->
-            val index = sortedMilestones.binarySearch { it.validFrom.compareTo(currentMilestone.validFrom) }
-            if (index < 0) {
-                Pair(sortedMilestones.getOrNull(-(index + 1) - 1), sortedMilestones.getOrNull(-(index + 1)))
-            } else {
-                Pair(sortedMilestones.getOrNull(index - 1), sortedMilestones.getOrNull(index + 1))
+    fun getBeforeAndAfter(existingMilestones: List<Milestone>, currentMilestone: Milestone) =
+        existingMilestones.sortedBy { it.validFrom }
+            .let { sortedMilestones ->
+                val index = sortedMilestones.binarySearch { it.validFrom.compareTo(currentMilestone.validFrom) }
+                if (index < 0) {
+                    Pair(sortedMilestones.getOrNull(-(index + 1) - 1), sortedMilestones.getOrNull(-(index + 1)))
+                } else {
+                    Pair(sortedMilestones.getOrNull(index - 1), sortedMilestones.getOrNull(index + 1))
+                }
             }
-        }
+
+    fun getFrom(validFrom: MilestoneValidFrom, existingMilestones: List<Milestone>) =
+        existingMilestones.sortedBy { it.validFrom }
+            .let { sortedMilestones ->
+                val index = sortedMilestones.binarySearch { it.validFrom.compareTo(validFrom) }
+                if (index < 0) {
+                    sortedMilestones.getOrNull(-(index + 1) - 1)
+                } else {
+                    sortedMilestones.getOrNull(index - 1)
+                }
+            }
 
 }
