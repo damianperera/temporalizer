@@ -16,17 +16,14 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.perera.temporalizer.data
+package io.perera.temporalizer.repository
 
-import lombok.EqualsAndHashCode
-import lombok.EqualsAndHashCode.Include
-import java.time.Instant
+import io.perera.temporalizer.data.Milestone
+import io.perera.temporalizer.data.MilestoneValidFrom
+import io.perera.temporalizer.data.MilestoneValidTo
 
-@EqualsAndHashCode
-data class Milestone(
-    @Include
-    val id: MilestoneId = String(),
-    val validFrom: MilestoneValidFrom = Instant.now(),
-    val validTo: MilestoneValidTo = Instant.MAX,
-    val entity: Input = object : Input{}
-)
+interface MilestoneRepository {
+    fun get(validFrom: MilestoneValidFrom): Milestone
+    fun getRange(validFrom: MilestoneValidFrom, validTo: MilestoneValidTo): List<Milestone>
+    fun set(milestone: Milestone)
+}

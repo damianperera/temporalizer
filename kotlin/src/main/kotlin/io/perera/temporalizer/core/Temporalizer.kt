@@ -18,12 +18,13 @@
 
 package io.perera.temporalizer.core
 
-import io.perera.temporalizer.data.Milestone
 import io.perera.temporalizer.data.Input
+import io.perera.temporalizer.data.Milestone
+import java.time.Instant
 
 interface Temporalizer {
-    /** Generates a [List] of [Milestone] for the provided [List] of [Input]. */
-    fun getInitialMilestones(inputs: List<Input>): List<Milestone>
-    /** Returns the changes to [Milestone] for the provided [Input].*/
-    fun getMilestoneChanges(input: Input, existingMilestones: List<Milestone>): List<Milestone>
+    /** Get temporal milestone. */
+    fun get(input: Input, validFrom: Instant)
+    /** Set milestone to date, backdate or postdate. */
+    fun set(milestone: Milestone)
 }

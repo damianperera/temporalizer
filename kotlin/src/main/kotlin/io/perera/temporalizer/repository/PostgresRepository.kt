@@ -16,37 +16,24 @@
  *     along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.perera.temporalizer.core
+package io.perera.temporalizer.repository
 
-import io.perera.temporalizer.data.Entity
 import io.perera.temporalizer.data.Milestone
-import io.perera.temporalizer.data.Input
-import io.perera.temporalizer.data.InputConverter
-import io.perera.temporalizer.repository.MilestoneRepository
-import org.springframework.stereotype.Component
-import java.time.Instant
+import io.perera.temporalizer.data.MilestoneValidFrom
+import io.perera.temporalizer.data.MilestoneValidTo
+import org.springframework.stereotype.Repository
 
-@Component
-class EntityBasedTemporalizer(
-    private val repository: MilestoneRepository
-): Temporalizer, InputConverter {
-    override fun get(input: Input, validFrom: Instant) {
+@Repository
+class PostgresRepository: MilestoneRepository {
+    override fun get(validFrom: MilestoneValidFrom): Milestone {
+        TODO("Not yet implemented")
+    }
+
+    override fun getRange(validFrom: MilestoneValidFrom, validTo: MilestoneValidTo): List<Milestone> {
         TODO("Not yet implemented")
     }
 
     override fun set(milestone: Milestone) {
         TODO("Not yet implemented")
     }
-
-    override fun parseInput(input: Input): Entity {
-        if (input !is Entity) {
-            throw Exception("Expected [Entity] as input.")
-        }
-        return input
-    }
-
-    override fun parseInput(inputs: List<Input>): List<Entity> =
-        inputs.filterIsInstance<Entity>().ifEmpty {
-            throw Exception("Expected [Entity] but did not find any.")
-        }
 }
