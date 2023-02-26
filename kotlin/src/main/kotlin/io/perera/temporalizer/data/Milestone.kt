@@ -27,6 +27,6 @@ data class Milestone(
     @Include
     val id: String = String(),
     val validFrom: Instant = Instant.now(),
-    val validTo: Instant = Instant.now(),
+    val validTo: Instant = Instant.MAX,
     val entity: Input = object : Input{}
 )

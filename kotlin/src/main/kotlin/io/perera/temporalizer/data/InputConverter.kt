@@ -19,6 +19,8 @@
 package io.perera.temporalizer.data
 
 interface InputConverter {
+    /** Convert a subtype of [Input] to another. */
     fun parseInput(input: Input): Input
+    /** Convert a [List] of [Input] subtypes to another. */
     fun parseInput(inputs: List<Input>): List<Input>
 }
