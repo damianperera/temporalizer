@@ -20,6 +20,7 @@ package io.perera.temporalizer.core
 
 import io.perera.temporalizer.data.Input
 import io.perera.temporalizer.data.Milestone
+import io.perera.temporalizer.data.TemporalizerConfig
 import java.time.Instant
 
 interface Temporalizer {
@@ -27,4 +28,6 @@ interface Temporalizer {
     fun get(input: Input, validFrom: Instant): Milestone?
     /** Set milestone to date, backdate or postdate. */
     fun set(milestone: Milestone)
+
+    fun shouldPersist(config: TemporalizerConfig) = config.enablePersistence
 }

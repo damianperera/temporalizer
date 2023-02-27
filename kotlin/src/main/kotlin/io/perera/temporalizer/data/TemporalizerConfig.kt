@@ -16,19 +16,12 @@
  * along with this program.  If not, see <https://www.gnu.org/licenses/>.
  */
 
-package io.perera.temporalizer.config
+package io.perera.temporalizer.data
 
-import io.perera.temporalizer.data.DataSourceConfig
-import io.perera.temporalizer.data.TemporalizerConfig
-import org.springframework.boot.context.properties.EnableConfigurationProperties
-import org.springframework.context.annotation.Bean
-import org.springframework.context.annotation.ComponentScan
-import org.springframework.context.annotation.Configuration
+import org.springframework.boot.context.properties.ConfigurationProperties
 
-@Configuration
-@ComponentScan("io.perera.temporalizer")
-@EnableConfigurationProperties(TemporalizerConfig::class)
-class AutoConfiguration {
-    @Bean
-    fun config() = TemporalizerConfig()
-}
+@ConfigurationProperties(prefix = "temporalizer")
+data class TemporalizerConfig(
+    var enablePersistence: Boolean = false,
+    var jdbc: DataSourceConfig = DataSourceConfig()
+)

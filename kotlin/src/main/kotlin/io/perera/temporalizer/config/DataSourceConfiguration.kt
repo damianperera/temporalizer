@@ -21,21 +21,22 @@ package io.perera.temporalizer.config
 import com.zaxxer.hikari.HikariConfig
 import com.zaxxer.hikari.HikariDataSource
 import io.perera.temporalizer.data.DataSourceConfig
+import io.perera.temporalizer.data.TemporalizerConfig
 import org.springframework.context.annotation.Bean
 import org.springframework.context.annotation.Configuration
 import javax.sql.DataSource
 
 @Configuration
 class DataSourceConfiguration(
-    private val config: DataSourceConfig
+    private val config: TemporalizerConfig
 ) {
 
     @Bean
     fun postgresDataSource(): DataSource {
         val hikariConfig = HikariConfig()
-        hikariConfig.jdbcUrl = "${config.url}/${config.name}"
-        hikariConfig.username = config.username
-        hikariConfig.password = config.password
+        hikariConfig.jdbcUrl = "${config.jdbc.url}/${config.jdbc.name}"
+        hikariConfig.username = config.jdbc.username
+        hikariConfig.password = config.jdbc.password
 
         return HikariDataSource(hikariConfig)
     }

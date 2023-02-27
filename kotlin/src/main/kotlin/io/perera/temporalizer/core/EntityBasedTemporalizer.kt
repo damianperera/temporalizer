@@ -18,10 +18,7 @@
 
 package io.perera.temporalizer.core
 
-import io.perera.temporalizer.data.Entity
-import io.perera.temporalizer.data.Input
-import io.perera.temporalizer.data.InputConverter
-import io.perera.temporalizer.data.Milestone
+import io.perera.temporalizer.data.*
 import io.perera.temporalizer.repository.MilestoneRepository
 import org.springframework.stereotype.Component
 import java.time.Instant
@@ -29,15 +26,20 @@ import java.util.UUID
 
 @Component
 class EntityBasedTemporalizer(
+    private val config: TemporalizerConfig,
     private val repository: MilestoneRepository
 ): Temporalizer, InputConverter {
     override fun get(input: Input, validFrom: Instant): Milestone? {
+        if (!shouldPersist(config)) throw Exception("Temporalizer persistence is not enabled.")
+
         val entity = parseInput(input)
         val existingMilestones = repository.getRange(entity.type, entity.id, Instant.MIN, Instant.MAX)
         return MilestoneEngine.getFrom(validFrom, existingMilestones)
     }
 
     override fun set(milestone: Milestone) {
+        if (!shouldPersist(config)) throw Exception("Temporalizer persistence is not enabled.")
+
         val entity = parseInput(milestone.entity)
         val existingMilestones = repository.getRange(entity.type, entity.id, Instant.MIN, Instant.MAX)
 
